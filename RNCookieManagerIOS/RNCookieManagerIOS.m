@@ -47,6 +47,13 @@ RCT_EXPORT_METHOD(get:(NSURL *)url callback:(RCTResponseSenderBlock)callback) {
     callback(@[[NSNull null], cookies]);
 }
 
+RCT_EXPORT_METHOD(getHeader:(NSURL *)url callback:(RCTResponseSenderBlock)callback) {
+    
+    NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:url];
+    NSDictionary *header = [NSHTTPCookie requestHeaderFieldsWithCookies:cookies];
+    callback(@[[NSNull null], header]);
+}
+
 RCT_EXPORT_METHOD(clearAll:(RCTResponseSenderBlock)callback) {
     NSHTTPCookieStorage *cookieStorage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
     for (NSHTTPCookie *c in cookieStorage.cookies) {
