@@ -44,11 +44,17 @@ CookieManager.setFromResponse('http://example.com', 'user_session=abcdefg; path=
   console.log("Set cookie", res);
 })
 
-// Get cookies as a request header string
+// Get cookies as a dictionary
 CookieManager.get('http://example.com', (err, res) => {
   console.log('Got cookies for url', res);
-  // Outputs 'user_session=abcdefg; path=/;'
 })
+
+// Get cookies as a request header string
+CookieManager.getHeader(contentJson.url, (err, res) => {
+  console.log('Got cookies header for url', res.Cookie);
+    // Outputs 'user_session=abcdefg; path=/;'
+})
+
 
 // list cookies (IOS ONLY)
 CookieManager.getAll((err, res) => {
